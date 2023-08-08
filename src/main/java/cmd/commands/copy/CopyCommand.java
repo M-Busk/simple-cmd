@@ -32,10 +32,17 @@ public class CopyCommand implements Runnable {
 
     @Override
     public void run() {
-        try {
-            Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!source.exists()) {
+            System.out.println("File dosen't exist");
+            return;
         }
+            if(target.isDirectory()){
+                target = new File(target, source.getName());
+            }
+            try {
+                Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

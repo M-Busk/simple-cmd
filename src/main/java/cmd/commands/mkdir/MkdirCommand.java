@@ -1,5 +1,7 @@
 package cmd.commands.mkdir;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -12,8 +14,8 @@ import java.io.IOException;
         mixinStandardHelpOptions = true)
 public class MkdirCommand implements Runnable {
 
-    @Option(names = {"-p",  "--parent"}, description = "create directory if it doesn't exist")
-    private boolean createParentDirectory;
+    @Option(names = {"-d",  "--dir"}, description = "create directory if it doesn't exist")
+    private boolean createDirectory;
 
     @Option(names = {"-f", "--file"}, description = "create file if doesn't exist")
     private boolean createFile;
@@ -26,10 +28,10 @@ public class MkdirCommand implements Runnable {
 
         if(createFile) {
             createFile(target);
-        } else if(createParentDirectory) {
-            createDirectoryWithParents(target);
-        } else {
+        } else if(createDirectory) {
             createDirectory(target);
+        } else {
+            System.out.println("an potions was not added, please add --f or --d");
         }
     }
     private void createFile(File file) {
@@ -51,12 +53,4 @@ public class MkdirCommand implements Runnable {
             System.out.println("Failed to create a directory");
         }
   }
-
-    private void createDirectoryWithParents(File directory) {
-         if (directory.mkdirs()) {
-            System.out.println("Directory created: " + directory.getAbsolutePath());
-          } else {
-            System.err.println("Failed to create directory: " + directory.getAbsolutePath());
-          }
-    }
 }
