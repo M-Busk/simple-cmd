@@ -3,10 +3,12 @@ package cmd.commands.dir;
 import cmd.SimpleCmd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import java.io.File;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static picocli.CommandLine.Option;
@@ -31,6 +33,9 @@ public class DirCommand implements Runnable {
     @Option(names = {"-s", "--sort"}, description = "possible values are {asc, desc} for ascending / descending order")
     private String sortOrder;
 
+    @CommandLine.Parameters(description = "directory to list")
+    private List<String> checkDir;
+
 
     public DirCommand() {
         /* intentionally empty */
@@ -38,7 +43,11 @@ public class DirCommand implements Runnable {
 
     @Override
     public void run() {
-        listFilesInDirectory(SimpleCmd.getCurrentLocation());
+        if (checkDir == null || checkDir.isEmpty()) {
+            listFilesInDirectory(SimpleCmd.getCurrentLocation());
+        } else {
+            listFilesInDirectory(new File(checkDir.get(0)));
+        }
     }
 
     private void listFilesInDirectory(File directory) {
