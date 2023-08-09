@@ -33,6 +33,9 @@ public class DirCommand implements Runnable {
     @Option(names = {"-s", "--sort"}, description = "possible values are {asc, desc} for ascending / descending order")
     private String sortOrder;
 
+    @Option(names = {"-l", "--long"}, description = "print absolute paths instead of relative ones")
+    private boolean useAbsolutePaths;
+
     @CommandLine.Parameters(description = "directory to list")
     private List<String> checkDir;
 
@@ -74,13 +77,16 @@ public class DirCommand implements Runnable {
     private void printLine(File f) {
         if (filesOnly) {
             if (!f.isDirectory()) {
-                LOG.info("file: {}\n", f.getAbsolutePath());
+                LOG.info("file: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
+                    .replaceFirst("^\\Q.\\\\E", ""));
             }
         } else {
             if (!f.isDirectory()) {
-                LOG.info("file: {}\n", f.getAbsolutePath());
+                LOG.info("file: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
+                    .replaceFirst("^\\Q.\\\\E", ""));
             } else {
-                LOG.info("directory: {}\n", f.getAbsolutePath());
+                LOG.info("directory: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
+                    .replaceFirst("^\\Q.\\\\E", ""));
             }
         }
     }
