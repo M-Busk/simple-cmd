@@ -1,4 +1,4 @@
-package cmd.commands.del.dir;
+package cmd.commands.dir;
 
 import cmd.SimpleCmd;
 import org.slf4j.Logger;

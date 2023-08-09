@@ -2,7 +2,6 @@ package cmd.commands.dir;
 
 import cmd.SimpleCmd;
 import cmd.commands.AbstractCommandTest;
-import cmd.commands.del.dir.DirCommand;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import picocli.CommandLine;

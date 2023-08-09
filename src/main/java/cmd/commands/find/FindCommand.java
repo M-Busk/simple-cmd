@@ -1,7 +1,7 @@
 package cmd.commands.find;
 
 import cmd.SimpleCmd;
-import cmd.commands.del.dir.DirCommand;
+import cmd.commands.dir.DirCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;

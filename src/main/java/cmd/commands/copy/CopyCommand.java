@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Scanner;
 
 /**
  * "Copy File" command class
@@ -19,6 +20,8 @@ import java.nio.file.StandardCopyOption;
         description = "Copy a file",
         mixinStandardHelpOptions = true)
 public class CopyCommand implements Runnable {
+
+    Scanner scanner = new Scanner(System.in);
 
     @Parameters(index = "0", description = "path of the file to copy")
     private File source;
@@ -34,9 +37,16 @@ public class CopyCommand implements Runnable {
     public void run() {
 
         if(source.isFile() && source.exists()) {
-            System.out.println("File exists");
-        } else {
-            System.out.println("File does not exist.");
+            if (target.isFile() && target.exists()) {
+                System.out.println("File exists, replace anyways? (y/n)");
+                String s = scanner.nextLine();
+                if (!"y".equalsIgnoreCase(s)) {
+                    System.out.println("Aborting.");
+                    return;
+                } else {
+                    System.out.println("Replacing file.");
+                }
+            }
             if(target.isDirectory()){
                 target = new File(target, source.getName());
             }
@@ -46,5 +56,6 @@ public class CopyCommand implements Runnable {
                 e.printStackTrace();
             }
         }
+
     }
 }

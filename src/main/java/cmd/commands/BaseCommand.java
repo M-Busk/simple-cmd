@@ -3,7 +3,7 @@ package cmd.commands;
 import cmd.commands.cd.CdCommand;
 import cmd.commands.copy.CopyCommand;
 import cmd.commands.del.DelCommand;
-import cmd.commands.del.dir.DirCommand;
+import cmd.commands.dir.DirCommand;
 import cmd.commands.find.FindCommand;
 import cmd.commands.mkdir.MkdirCommand;
 import cmd.commands.move.MoveCommand;
