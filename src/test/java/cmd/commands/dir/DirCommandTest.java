@@ -32,6 +32,21 @@ class DirCommandTest extends AbstractCommandTest {
     }
 
     @Test
+    void testDirWithL(@TempDir Path tempDir) throws IOException {
+        // given
+        prepareTestFolder(tempDir);
+        SimpleCmd.setCurrentLocation(tempDir.toFile());
+        String[] args = {"-l"};
+        DirCommand dirCommand = CommandLine.populateCommand(new DirCommand(), args);
+        // when
+        dirCommand.run();
+        // then
+        String expected = tempDir.toAbsolutePath() + File.separator + "myFile.txt";
+        String actual = getOutputStream().toString();
+        assertTrue(actual.contains(expected), "Expected : " + expected + " But was: " + actual);
+    }
+
+    @Test
     void testDirWithoutArguments(@TempDir Path tempDir) throws IOException {
         // given
         prepareTestFolder(tempDir);

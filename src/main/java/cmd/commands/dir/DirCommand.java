@@ -75,19 +75,13 @@ public class DirCommand implements Runnable {
     }
 
     private void printLine(File f) {
-        if (filesOnly) {
-            if (!f.isDirectory()) {
-                LOG.info("file: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
-                    .replaceFirst("^\\Q.\\\\E", ""));
-            }
-        } else {
-            if (!f.isDirectory()) {
-                LOG.info("file: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
-                    .replaceFirst("^\\Q.\\\\E", ""));
-            } else {
-                LOG.info("directory: {}\n", useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
-                    .replaceFirst("^\\Q.\\\\E", ""));
-            }
+        String filePath = useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
+            .replaceFirst("^\\Q.\\\\E", "");
+
+        if (!f.isDirectory()) {
+            LOG.info("file: {}\n", filePath);
+        } else if (!filesOnly) {
+            LOG.info("directory: {}\n", filePath);
         }
     }
 }
