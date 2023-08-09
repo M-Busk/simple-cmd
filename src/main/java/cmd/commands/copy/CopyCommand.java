@@ -32,10 +32,11 @@ public class CopyCommand implements Runnable {
 
     @Override
     public void run() {
-        if(!source.exists()) {
-            System.out.println("File dosen't exist");
-            return;
-        }
+
+        if(source.isFile() && source.exists()) {
+            System.out.println("File exists");
+        } else {
+            System.out.println("File does not exist.");
             if(target.isDirectory()){
                 target = new File(target, source.getName());
             }
@@ -44,5 +45,6 @@ public class CopyCommand implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
     }
 }
