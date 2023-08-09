@@ -7,6 +7,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -75,8 +76,10 @@ public class DirCommand implements Runnable {
     }
 
     private void printLine(File f) {
-        String filePath = useAbsolutePaths ? f.getAbsolutePath() : f.getPath()
-            .replaceFirst("^\\Q.\\\\E", "");
+        String filePath = useAbsolutePaths
+            ? f.getAbsolutePath()
+            : Paths.get(SimpleCmd.getCurrentLocation().getAbsolutePath())
+                .relativize(Paths.get(f.getAbsolutePath())).toString();
 
         if (!f.isDirectory()) {
             LOG.info("file: {}\n", filePath);
