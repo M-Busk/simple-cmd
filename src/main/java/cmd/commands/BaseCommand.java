@@ -5,6 +5,7 @@ import cmd.commands.copy.CopyCommand;
 import cmd.commands.del.DelCommand;
 import cmd.commands.dir.DirCommand;
 import cmd.commands.find.FindCommand;
+import cmd.commands.hash.HashCommand;
 import cmd.commands.mkdir.MkdirCommand;
 import cmd.commands.move.MoveCommand;
 import cmd.commands.time.date.DateCommand;
@@ -27,7 +28,7 @@ import picocli.CommandLine.Command;
         mixinStandardHelpOptions = true,
         subcommands = {DirCommand.class, DelCommand.class, CopyCommand.class,
             CdCommand.class, FindCommand.class, MoveCommand.class , MkdirCommand.class,
-        DateCommand.class, TimeCommand.class, DatetimeCommand.class})
+        DateCommand.class, TimeCommand.class, DatetimeCommand.class, HashCommand.class })
 public class BaseCommand implements Runnable {
     public BaseCommand() {
         /* intentionally empty */
