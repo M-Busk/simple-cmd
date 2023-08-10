@@ -1,5 +1,6 @@
-package cmd.commands;
+package cmd.commands.time;
 
+import cmd.commands.AbstractCommandTest;
 import cmd.commands.time.date.DateCommand;
 import cmd.commands.time.datetime.DatetimeCommand;
 import org.junit.jupiter.api.Test;
