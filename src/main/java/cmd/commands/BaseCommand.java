@@ -7,6 +7,9 @@ import cmd.commands.dir.DirCommand;
 import cmd.commands.find.FindCommand;
 import cmd.commands.mkdir.MkdirCommand;
 import cmd.commands.move.MoveCommand;
+import cmd.commands.time.date.DateCommand;
+import cmd.commands.time.datetime.DatetimeCommand;
+import cmd.commands.time.time.TimeCommand;
 import picocli.CommandLine.Command;
 
 /**
@@ -23,7 +26,8 @@ import picocli.CommandLine.Command;
         description = "base command",
         mixinStandardHelpOptions = true,
         subcommands = {DirCommand.class, DelCommand.class, CopyCommand.class,
-            CdCommand.class, FindCommand.class, MoveCommand.class , MkdirCommand.class })
+            CdCommand.class, FindCommand.class, MoveCommand.class , MkdirCommand.class,
+        DateCommand.class, TimeCommand.class, DatetimeCommand.class})
 public class BaseCommand implements Runnable {
     public BaseCommand() {
         /* intentionally empty */
