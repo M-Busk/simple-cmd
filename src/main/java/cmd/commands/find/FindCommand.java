@@ -50,7 +50,7 @@ public class FindCommand implements Runnable {
 
   private void printLine(File f) {
       if (!f.isDirectory()) {
-        LOG.info("{}\n", f.getAbsolutePath());
+        LOG.info("{} ({} bytes)\n", f.getAbsolutePath(), f.length());
       }
   }
 }
